@@ -56,7 +56,6 @@
       "scripts": {
             "dev": "vite",
             "start": "vite",
-            "build": "vite build",
-            "netlify-build": "./netlify-build.sh"
+            "build": "vite build"
       }
 }
