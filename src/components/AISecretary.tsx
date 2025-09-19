@@ -214,14 +214,14 @@ export function AISecretary({ isOpen, onClose, onContactFormOpen }: AISecretaryP
       timestamp: new Date()
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev: Message[]) => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
 
     // Simulate typing delay
     setTimeout(() => {
       const response = generateResponse(inputValue);
-      setMessages(prev => [...prev, response]);
+      setMessages((prev: Message[]) => [...prev, response]);
       setIsTyping(false);
     }, 1000);
   };
@@ -231,7 +231,7 @@ export function AISecretary({ isOpen, onClose, onContactFormOpen }: AISecretaryP
     setTimeout(() => handleSendMessage(), 100);
   };
 
-  const handleAction = (action: Message['actions'][0]) => {
+  const handleAction = (action: NonNullable<Message['actions']>[number]) => {
     if (action.type === 'contact') {
       onContactFormOpen?.();
       onClose();
@@ -286,7 +286,7 @@ export function AISecretary({ isOpen, onClose, onContactFormOpen }: AISecretaryP
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-          {messages.map((message) => (
+          {messages.map((message: Message) => (
             <div key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               {message.role === 'assistant' && (
                 <div className="w-8 h-8 bg-[var(--accent-active)] rounded-full flex items-center justify-center shrink-0">
@@ -299,7 +299,7 @@ export function AISecretary({ isOpen, onClose, onContactFormOpen }: AISecretaryP
                     <p className="text-sm">{message.content}</p>
                     {message.actions && (
                       <div className="flex flex-wrap gap-2 mt-3">
-                        {message.actions.map((action, index) => (
+                        {message.actions.map((action: NonNullable<Message['actions']>[number], index: number) => (
                           <Button
                             key={index}
                             variant="outline"
@@ -349,9 +349,9 @@ export function AISecretary({ isOpen, onClose, onContactFormOpen }: AISecretaryP
           <div className="flex gap-2">
             <Input
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
               placeholder="Ask about experience, skills, availability..."
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSendMessage()}
               className="flex-1"
             />
             <Button 
