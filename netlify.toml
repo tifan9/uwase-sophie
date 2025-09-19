@@ -2,6 +2,8 @@
   publish = "build"
   command = "npm run build"
 
+# No plugins needed for Vite project
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
