@@ -52,6 +52,9 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      commonjsOptions: {
+        include: [/node_modules/],
+      },
     },
     server: {
       port: 3000,
