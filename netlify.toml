@@ -2,11 +2,7 @@
   publish = "build"
   command = "npm run build"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-  
-  [plugins.inputs]
-  disable = true
+# No plugins needed for Vite project
 
 [[redirects]]
   from = "/*"
